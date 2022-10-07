@@ -3,4 +3,18 @@ services:
   postgres:
     image: 'postgres:latest'
 
+  redis:
+    image: 'redis:latest'
+
+  server:
+    build:
+      dockerfile: Dockerfile.dev
+      # spell out the directory that has the Dockerfile
+      context: ./server
+    volumes:
+      # don't override the node_modules folder
+      - /app/node_modules
+      # look in the local server folder for anything
+      # else that should be in /app
+      - ./server:/app
 
